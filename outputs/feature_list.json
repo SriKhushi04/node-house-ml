@@ -1,0 +1,20 @@
+[
+  "CLRSKY_SFC_SW_DWN",
+  "hour_sin",
+  "hour_cos",
+  "doy_sin",
+  "doy_cos",
+  "ALLSKY_SFC_SW_DWN_lag24h",
+  "ALLSKY_SFC_SW_DWN_lag48h",
+  "ALLSKY_SFC_SW_DWN_lag72h",
+  "T2M_lag24h",
+  "T2M_lag48h",
+  "T2M_lag72h",
+  "RH2M_lag24h",
+  "RH2M_lag48h",
+  "RH2M_lag72h",
+  "WS2M_lag24h",
+  "WS2M_lag48h",
+  "WS2M_lag72h",
+  "allsky_roll_mean_3d"
+]
