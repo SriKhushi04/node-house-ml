@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import xgboost as xgb
-from sklearn.metrics import mean_absolute_error, mean_squared_error
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 import config
 import features
@@ -85,14 +85,17 @@ def main():
     preds = model.predict(X_test)
     preds = np.clip(preds, 0, None)  # yield can't be negative
 
-    rmse = float(np.sqrt(mean_squared_error(y_test, preds)))
     mae = float(mean_absolute_error(y_test, preds))
+    rmse = float(np.sqrt(mean_squared_error(y_test, preds)))
+    r2 = float(r2_score(y_test, preds))
     print(f"RMSE: {rmse:.4f} kWh")
     print(f"MAE:  {mae:.4f} kWh")
+    print(f"R²:   {r2:.4f}")
 
     metrics = {
         "rmse_kwh": rmse,
         "mae_kwh": mae,
+        "r2": r2,
         "test_rows": len(test_df),
         "train_rows": len(train_df),
         "test_fraction": len(test_df) / len(df),

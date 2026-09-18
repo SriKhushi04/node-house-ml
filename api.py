@@ -40,6 +40,9 @@ def get_forecast():
         with open(config.FORECAST_OUTPUT_PATH, "r") as f:
             data = json.load(f)
 
+        with open(config.METRICS_PATH, "r") as f:
+            metrics = json.load(f)
+
         forecast_items = data.get("forecast", [])
 
         return {
@@ -50,7 +53,11 @@ def get_forecast():
             "horizonHours": config.FORECAST_HORIZON_HOURS,
             "source": "NASA POWER",
             "forecast": forecast_items,
+            "evaluation": {
+                "mae_kwh": metrics["mae_kwh"],
+                "rmse_kwh": metrics["rmse_kwh"],
+                "r2": metrics["r2"],
+            },
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to generate forecast: {str(e)}")
-

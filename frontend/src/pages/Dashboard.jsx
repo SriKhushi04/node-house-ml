@@ -38,6 +38,7 @@ export default function Dashboard() {
   }, []);
 
   const forecastList = forecastData?.forecast || [];
+  const evaluation = forecastData?.evaluation;
   
   const totalExpected = forecastList.reduce(
     (sum, item) => sum + (item.predictedEnergyKWh || 0),
@@ -182,11 +183,26 @@ export default function Dashboard() {
           <div className="kv-list">
             <div className="kv-row">
               <span className="kv-key">MAE</span>
-              <span className="kv-value">0.1161 kWh</span>
+              <span className="kv-value">
+                {evaluation ? `${evaluation.mae_kwh.toFixed(4)} kWh` : '—'}
+              </span>
             </div>
             <div className="kv-row">
               <span className="kv-key">RMSE</span>
-              <span className="kv-value">0.2673 kWh</span>
+              <span className="kv-value">
+                {evaluation ? `${evaluation.rmse_kwh.toFixed(4)} kWh` : '—'}
+              </span>
+            </div>
+            <div className="kv-row">
+              <span
+                className="kv-key metric-help"
+                title="R-squared indicates how much variation in the target is explained by the model."
+              >
+                R² / R-squared
+              </span>
+              <span className="kv-value">
+                {evaluation ? evaluation.r2.toFixed(4) : '—'}
+              </span>
             </div>
             <div className="kv-row">
               <span className="kv-key">Validation Method</span>

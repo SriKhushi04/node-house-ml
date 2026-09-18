@@ -17,7 +17,7 @@ import os
 import numpy as np
 import pandas as pd
 import xgboost as xgb
-from sklearn.metrics import mean_absolute_error, mean_squared_error
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from pvlib.location import Location
 
 import config
@@ -245,6 +245,7 @@ for date_string in BACKTEST_DATES:
             predictions
         )
     )
+    r2 = r2_score(actual, predictions)
 
     actual_total = actual.sum()
     predicted_total = predictions.sum()
@@ -253,12 +254,14 @@ for date_string in BACKTEST_DATES:
         "date": date_string,
         "mae_kwh": float(mae),
         "rmse_kwh": float(rmse),
+        "r2": float(r2),
         "actual_total_kwh": float(actual_total),
         "predicted_total_kwh": float(predicted_total),
     })
 
     print(f"MAE:              {mae:.4f} kWh")
     print(f"RMSE:             {rmse:.4f} kWh")
+    print(f"R²:               {r2:.4f}")
     print(f"Actual total:     {actual_total:.2f} kWh")
     print(f"Predicted total:  {predicted_total:.2f} kWh")
 
@@ -303,6 +306,11 @@ print(
 print("\nAverage RMSE:")
 print(
     f"{results_df['rmse_kwh'].mean():.4f} kWh"
+)
+
+print("\nAverage R²:")
+print(
+    f"{results_df['r2'].mean():.4f}"
 )
 
 print(

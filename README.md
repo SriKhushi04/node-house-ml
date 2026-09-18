@@ -32,7 +32,7 @@ year, cached to `data/nasa_power_raw.csv` so it's only pulled once) and
 trains the model. Outputs land in `outputs/`:
 - `xgb_solar_model.json` — trained model
 - `feature_list.json` — exact feature order the model expects
-- `metrics.json` — RMSE / MAE on the held-out test set
+- `metrics.json` — RMSE / MAE / R² on the held-out test set
 - `predicted_vs_actual.png` — plot for the hackathon deliverable
 
 ## 4. Predict the next 24 hours
